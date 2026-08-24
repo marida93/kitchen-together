@@ -74,3 +74,28 @@ function displayIngredients() {
     });
 }
 displayIngredients();
+
+function findRecipes() {
+
+    const ingredients =
+        JSON.parse(localStorage.getItem("kitchenIngredients")) || [];
+
+    const recipeResults = document.getElementById("recipeResults");
+
+    if (ingredients.length === 0) {
+        recipeResults.innerHTML =
+            "<p>Add some ingredients first! 🥕</p>";
+        return;
+    }
+
+    recipeResults.innerHTML = `
+        <h3>What you can cook 🍳</h3>
+        <p>You currently have:</p>
+        <ul>
+            ${ingredients.map(function(ingredient) {
+                return `<li>${ingredient.name}</li>`;
+            }).join("")}
+        </ul>
+        <p>We're ready to find recipes using these ingredients! 👩‍🍳</p>
+    `;
+}
