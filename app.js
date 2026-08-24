@@ -45,12 +45,30 @@ function displayIngredients() {
 
     const ingredients = JSON.parse(localStorage.getItem("kitchenIngredients")) || [];
 
-    ingredients.forEach(function(ingredient) {
+    ingredients.forEach(function(ingredient, index) {
 
         const newItem = document.createElement("li");
 
         newItem.textContent =
-            `${ingredient.name} — ${ingredient.quantity} ${ingredient.unit}`;
+            `${ingredient.name} — ${ingredient.quantity} ${ingredient.unit} `;
+
+        const deleteButton = document.createElement("button");
+
+        deleteButton.textContent = "Delete";
+
+        deleteButton.onclick = function() {
+
+            ingredients.splice(index, 1);
+
+            localStorage.setItem(
+                "kitchenIngredients",
+                JSON.stringify(ingredients)
+            );
+
+            displayIngredients();
+        };
+
+        newItem.appendChild(deleteButton);
 
         list.appendChild(newItem);
     });
