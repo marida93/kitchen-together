@@ -27,7 +27,8 @@ function addIngredient() {
 
     ingredients.push(newIngredient);
 
-    localStorage.setItem("kitchenIngredients", JSON.stringify(ingredients));
+    localStorage.setItem("kitchenIngredients", JSON.stringify(ingredients)
+                        );
 
     displayIngredients();
 
