@@ -4,10 +4,16 @@ function sayHello() {
 
 function addIngredient() {
 
-    const input = document.getElementById("ingredientInput");
-    const ingredient = input.value;
+    const ingredientInput = document.getElementById("ingredientInput");
+    const quantityInput = document.getElementById("quantityInput");
+    const unitInput = document.getElementById("unitInput");
 
-    if (ingredient === "") {
+    const ingredient = ingredientInput.value;
+    const quantity = quantityInput.value;
+    const unit = unitInput.value;
+
+    if (ingredient === "" || quantity === "" || unit === "") {
+        alert("Please fill in all the fields.");
         return;
     }
 
@@ -15,9 +21,11 @@ function addIngredient() {
 
     const newItem = document.createElement("li");
 
-    newItem.textContent = ingredient;
+    newItem.textContent = `${ingredient} — ${quantity} ${unit}`;
 
     list.appendChild(newItem);
 
-    input.value = "";
+    ingredientInput.value = "";
+    quantityInput.value = "";
+    unitInput.value = "";
 }
