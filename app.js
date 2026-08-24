@@ -17,15 +17,41 @@ function addIngredient() {
         return;
     }
 
-    const list = document.getElementById("ingredientList");
+    const newIngredient = {
+        name: ingredient,
+        quantity: quantity,
+        unit: unit
+    };
 
-    const newItem = document.createElement("li");
+    let ingredients = JSON.parse(localStorage.getItem("kitchenIngredients")) || [];
 
-    newItem.textContent = `${ingredient} — ${quantity} ${unit}`;
+    ingredients.push(newIngredient);
 
-    list.appendChild(newItem);
+    localStorage.setItem("kitchenIngredients", JSON.stringify(ingredients));
+
+    displayIngredients();
 
     ingredientInput.value = "";
     quantityInput.value = "";
     unitInput.value = "";
 }
+
+function displayIngredients() {
+
+    const list = document.getElementById("ingredientList");
+
+    list.innerHTML = "";
+
+    const ingredients = JSON.parse(localStorage.getItem("kitchenIngredients")) || [];
+
+    ingredients.forEach(function(ingredient) {
+
+        const newItem = document.createElement("li");
+
+        newItem.textContent =
+            `${ingredient.name} — ${ingredient.quantity} ${ingredient.unit}`;
+
+        list.appendChild(newItem);
+    });
+}
+displayIngredients();
